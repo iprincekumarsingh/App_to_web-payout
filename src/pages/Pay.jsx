@@ -10,7 +10,7 @@ const Pay = () => {
   const { search } = useLocation();
   const params = new URLSearchParams(search);
   const tokenParam = params.get("token") || "default_token";
-  const amount = params.get("amount") || "default_order_id";
+  const orderIdParam = params.get("amount") || "default_order_id";
 
   const buy = async () => {
     try {
@@ -31,7 +31,7 @@ const Pay = () => {
         const orderResponse = await axios.post(
           "https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-order",
           {
-            amount: amount,
+            amount: order_id,
           },
           {
             headers: {
