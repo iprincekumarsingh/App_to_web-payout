@@ -32,12 +32,12 @@ const Pay = () => {
           .post(
             "https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-order",
             {
-              amount: 400,
+              amount: Number(orderIdParam),
             },
             {
               headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${tokenParam}`,
+                Authorization: `Bearer ${tokenParam}`, // Replace with your actual API key
               },
             }
           )
@@ -88,7 +88,10 @@ const Pay = () => {
   return (
     <div className="App">
       <Helmet>
-        <script src="https://api.nimbbl.tech/static/assets/js/checkout.js" async />
+        <script
+          src="https://api.nimbbl.tech/static/assets/js/checkout.js"
+          async
+        />
       </Helmet>
       <header className="App-header">
         <h1>Click here to pay out</h1>
