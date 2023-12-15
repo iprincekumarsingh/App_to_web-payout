@@ -9,7 +9,7 @@ function App() {
   const buy = async () => {
     try {
       const response = await axios.post(
-        "http://127.0.0.1:4000/api/v1/payment/create-token",
+        "https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-token",
         {},
         {
           headers: {
@@ -22,7 +22,7 @@ function App() {
 
       if (token) {
         const orderResponse = await axios.post(
-          "http://127.0.0.1:4000/api/v1/payment/create-order",
+          "https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-order",
           {
             amount: 4000,
           },
