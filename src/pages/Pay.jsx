@@ -31,7 +31,7 @@ const Pay = () => {
         const orderResponse = await axios.post(
           "https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-order",
           {
-            amount: order_id,
+          amount: Number(orderIdParam),
           },
           {
             headers: {
