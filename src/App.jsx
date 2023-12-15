@@ -20,7 +20,7 @@ function App() {
       );
       setToken(response.data.data.orderToken);
 
-      if (token) {
+      if (response.data.data.orderToken != null) {
         const orderResponse = await axios.post(
           "https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-order",
           {
