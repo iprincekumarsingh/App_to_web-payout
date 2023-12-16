@@ -10,13 +10,26 @@ const Pay = () => {
   const { search } = useLocation();
   const params = new URLSearchParams(search);
   const tokenParam = params.get("token") || "default_token";
-  const orderIdParam = params.get("amount") || "default_order_id";
+  const planIdParam = params.get("planId") || "default_order_id";
 
   const fetchDataAndBuy = async () => {
     try {
+      if (
+        tokenParam === "default_token" ||
+        planIdParam === "default_order_id"
+      ) {
+        alert("Please select a plan first");
+        return;
+      }
+      if (tokenParam === null || planIdParam === null) {
+        alert("Please select a plan first");
+        return;
+      }
       const response = await axios.post(
-        "https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-token",
-        {},
+        "http://127.0.0.1:4000/api/v1/payment/create-token",
+        {
+          plan_id: planIdParam,
+        },
         {
           headers: {
             "Content-Type": "application/json",
@@ -30,9 +43,9 @@ const Pay = () => {
       if (response.data.data.orderToken !== null) {
         const orderResponse = await axios
           .post(
-            "https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-order",
+            "http://127.0.0.1:4000/api/v1/payment/create-order",
             {
-              amount: Number(orderIdParam),
+              plan_id: planIdParam,
             },
             {
               headers: {
@@ -42,15 +55,48 @@ const Pay = () => {
             }
           )
           .then((res) => {
-            console.log(res);
-            setOrder_id(res.data.order_id);
+            console.log(res.data.data);
+            // setOrder_id(res.data.data.order_id);
 
             const options = {
               access_key: "access_key_81x7BagWlM1Rn05N",
-              order_id: res.data.order_id,
+              order_id: res.data.data.order_id,
               callback_handler: function (response) {
+                console.log(response);
                 if (response.status === "success") {
-                  alert("Payment successful");
+                  console.log(response.nimbbl_transaction_id);
+                  console.log(response.order_id);
+                  console.log(response.order.invoice_id);
+                  console.log(response.transaction.transaction_amount);
+
+                  axios
+                    .post(
+                      "http://127.0.0.1:4000/api/v1/payment/create-payment",
+                      {
+                        nimbbl_order_id: response.order_id,
+                        nimbbl_transaction_id: response.nimbbl_transaction_id,
+                        order_invoice: response.order.invoice_id,
+                        order_amount: response.transaction.transaction_amount,
+                        transaction_id: response.transaction.transaction_id,
+                        order_status: response.status,
+                      },
+                      {
+                        headers: {
+                          "Content-Type": "application/json",
+                          Authorization: `Bearer ${tokenParam}`, // Replace with your actual API key
+                        },
+                      }
+                    )
+                    .then((res) => {
+                      console.log(res);
+                    })
+                    .catch((err) => {
+                      console.log(err);
+                    });
+
+                  // if the response is authentic, then only fulfill the order
+                } else if (response.status === "failure") {
+                  // alert("Payment failed");
                 }
               },
             };
@@ -80,7 +126,7 @@ const Pay = () => {
   }, []);
 
   useEffect(() => {
-    if (tokenParam !== "default_token" && orderIdParam !== "default_order_id") {
+    if (tokenParam !== "default_token" && planIdParam !== "default_order_id") {
       fetchDataAndBuy();
     }
   }, []);
