@@ -9,6 +9,11 @@ const router = createBrowserRouter([
     path: "/",
     element: <Pay />,
   },
+  {
+    path: "/pay/success",
+    element: <Pay />,
+  },
+  
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
