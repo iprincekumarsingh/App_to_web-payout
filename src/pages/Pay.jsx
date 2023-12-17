@@ -26,7 +26,7 @@ const Pay = () => {
         return;
       }
       const response = await axios.post(
-        "http://127.0.0.1:4000/api/v1/payment/create-token",
+        "https://app-to-web-payout-51b6.vercel.app/api/v1/payment/create-token",
         {
           plan_id: planIdParam,
         },
@@ -43,7 +43,7 @@ const Pay = () => {
       if (response.data.data.orderToken !== null) {
         const orderResponse = await axios
           .post(
-            "http://127.0.0.1:4000/api/v1/payment/create-order",
+            "https://app-to-web-payout-51b6.vercel.app/api/v1/payment/create-order",
             {
               plan_id: planIdParam,
             },
@@ -71,7 +71,7 @@ const Pay = () => {
 
                   axios
                     .post(
-                      "http://127.0.0.1:4000/api/v1/payment/create-payment",
+                      "https://app-to-web-payout-51b6.vercel.app/api/v1/payment/create-payment",
                       {
                         nimbbl_order_id: response.order_id,
                         nimbbl_transaction_id: response.nimbbl_transaction_id,
