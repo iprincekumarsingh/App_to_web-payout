@@ -10,6 +10,7 @@ const Pay = () => {
   const [searchParams] = useSearchParams();
   const tokenParam = searchParams.get("token") || "default_token";
   const planIdParam = searchParams.get("planId") || "default_order_id";
+  const plan_type = searchParams.get("plan_type") || "one_time"
 
   const fetchDataAndBuy = async () => {
     try {
@@ -29,6 +30,7 @@ const Pay = () => {
         "https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-token",
         {
           plan_id: planIdParam,
+          plan_type:plan_type
         },
         {
           headers: {
@@ -77,6 +79,7 @@ const Pay = () => {
                     order_amount: response.transaction.transaction_amount,
                     transaction_id: response.transaction.transaction_id,
                     order_status: response.status,
+                    plan_type:plan_type
                   },
                   {
                     headers: {
