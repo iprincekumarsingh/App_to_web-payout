@@ -6,7 +6,7 @@ function onChange(value) {
 }
 
 function Test() {
-  return <ReCAPTCHA sitekey="your_recaptcha_site_key" onChange={onChange} />;
+  return <ReCAPTCHA sitekey="6LdV5DkpAAAAANMlYsbUdZsj-reC4K1mQwoU9pV1" onChange={onChange} />;
 }
 
 export default Test;
