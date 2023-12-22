@@ -1,23 +1,12 @@
 import React from "react";
-import { Helmet } from "react-helmet";
+import ReCAPTCHA from "react-google-recaptcha";
 
-const Test = () => {
-  return (
-    <html>
-      <Helmet>
-        <title>reCAPTCHA demo: Simple page</title>
-        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-      </Helmet>
-      <body>
-        <form action="?" method="POST">
-          <div className="g-recaptcha" data-sitekey="6LdV5DkpAAAAANMlYsbUdZsj-reC4K1mQwoU9pV1
-"></div>
-          <br />
-          <input type="submit" value="Submit" />
-        </form>
-      </body>
-    </html>
-  );
-};
+function onChange(value) {
+  console.log("Captcha value:", value);
+}
+
+function Test() {
+  return <ReCAPTCHA sitekey="your_recaptcha_site_key" onChange={onChange} />;
+}
 
 export default Test;
