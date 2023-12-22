@@ -27,7 +27,7 @@ const Pay = () => {
       }
 
       const response = await axios.post(
-        "https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-token",
+        "http://127.0.0.1:4000/api/v1/payment/create-token",
         {
           plan_id: planIdParam,
           plan_type:plan_type
@@ -44,7 +44,7 @@ const Pay = () => {
 
       if (response.data.data.orderToken !== null) {
         const orderResponse = await axios.post(
-          "https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-order",
+          "http://127.0.0.1:4000/api/v1/payment/create-order",
           {
             plan_id: planIdParam,
           },
@@ -71,7 +71,7 @@ const Pay = () => {
 
               axios
                 .post(
-                  "https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-payment",
+                  "http://127.0.0.1:4000/api/v1/payment/create-payment",
                   {
                     nimbbl_order_id: response.order_id,
                     nimbbl_transaction_id: response.nimbbl_transaction_id,
@@ -96,9 +96,9 @@ const Pay = () => {
                 });
 
               // Add a parameter to the URL if the payment is successful
-              navigate(`/pay/success`);
+              // navigate(`/pay/success`);
             } else if (response.status === "failure") {
-              // alert("Payment failed");
+              alert("Payment failed");
             }
           },
         };

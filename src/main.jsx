@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Pay from "./pages/Pay";
+import Test from "./pages/Test";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +13,9 @@ const router = createBrowserRouter([
   {
     path: "/pay/success",
     element: <Pay />,
+  }, {
+    path: "/test",
+    element: <Test />,
   },
   
 ]);
