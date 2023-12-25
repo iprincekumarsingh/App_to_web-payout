@@ -27,7 +27,7 @@ const Pay = () => {
       }
 
       const response = await axios.post(
-        "http://127.0.0.1:4000/api/v1/payment/create-token",
+        "https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-token",
         {
           plan_id: planIdParam,
           plan_type:plan_type
