@@ -1,12 +1,22 @@
 import React from "react";
-import ReCAPTCHA from "react-google-recaptcha";
 
+import {
+  GoogleReCaptchaProvider,
+  GoogleReCaptcha,
+} from "react-google-recaptcha-v3";
 function onChange(value) {
   console.log("Captcha value:", value);
 }
 
 function Test() {
-  return <ReCAPTCHA sitekey="6LdV5DkpAAAAANMlYsbUdZsj-reC4K1mQwoU9pV1" onChange={onChange} />;
+  const handleVerify = (token) => {
+    console.log(token);
+  };
+  return (
+    <GoogleReCaptchaProvider reCaptchaKey="6LfW7DkpAAAAANhD7WCELgzxYFjtvTZeikjSq8cp">
+      <GoogleReCaptcha onVerify={handleVerify} />
+    </GoogleReCaptchaProvider>
+  );
 }
 
 export default Test;
