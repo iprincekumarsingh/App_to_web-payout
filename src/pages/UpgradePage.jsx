@@ -1,28 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Helmet } from "react-helmet";
 import { useSearchParams, useNavigate } from "react-router-dom";
 
-const Pay = () => {
+const UpgradePage = () => {
   const [token, setToken] = useState("");
-
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const tokenParam = searchParams.get("token") || "default_token";
   const planIdParam = searchParams.get("planId") || "default_order_id";
-  const plan_type = searchParams.get("plan_type") || "one_time"
+  const plan_type = searchParams.get("plan_type") || "one_time";
+  const role = searchParams.get("role") || "default_role";
+  const isupgrade = searchParams.get("isupgrade") || "false";
+  const [loading, setLoading] = useState(false);
 
   const fetchDataAndBuy = async () => {
     try {
       if (
         tokenParam === "default_token" ||
-        planIdParam === "default_order_id"
+        planIdParam === "default_order_id" ||
+        role === "default_role"
       ) {
-        alert("Please select a plan first");
+        console.log(tokenParam, planIdParam, role, isupgrade);
+
         return;
       }
       if (tokenParam === null || planIdParam === null) {
-        alert("Please select a plan first");
+        console.log(tokenParam, planIdParam, role, isupgrade);
         return;
       }
 
@@ -30,7 +34,7 @@ const Pay = () => {
         "https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-token",
         {
           plan_id: planIdParam,
-          plan_type:plan_type
+          plan_type: plan_type,
         },
         {
           headers: {
@@ -44,7 +48,7 @@ const Pay = () => {
 
       if (response.data.data.orderToken !== null) {
         const orderResponse = await axios.post(
-          "https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-order",
+          `https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-order?isupgrade=true&role=${role}`,
           {
             plan_id: planIdParam,
           },
@@ -57,6 +61,11 @@ const Pay = () => {
         );
 
         console.log(orderResponse.data.data);
+
+        if (orderResponse.data.data.paymentInitiated) {
+          // Check if payment has already been initiated
+          return;
+        }
 
         const options = {
           access_key: "access_key_81x7BagWlM1Rn05N",
@@ -71,7 +80,7 @@ const Pay = () => {
 
               axios
                 .post(
-                  "https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-payment",
+                  `https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-payment?role=${role}&isupgrade=true`,
                   {
                     nimbbl_order_id: response.order_id,
                     nimbbl_transaction_id: response.nimbbl_transaction_id,
@@ -79,7 +88,7 @@ const Pay = () => {
                     order_amount: response.transaction.transaction_amount,
                     transaction_id: response.transaction.transaction_id,
                     order_status: response.status,
-                    plan_type:plan_type
+                    plan_type: plan_type,
                   },
                   {
                     headers: {
@@ -95,9 +104,8 @@ const Pay = () => {
                   console.log(err);
                 });
 
-                // change the url to success page
-              window.location.href = "/pay/success";
-           
+              // change the url to the success page
+              navigate("/pay/success");
             } else if (response.status === "failure") {
               alert("Payment failed");
             }
@@ -112,7 +120,15 @@ const Pay = () => {
     }
   };
 
-  useEffect(() => {
+  // Use window.onload instead of useEffect
+  window.onload = () => {
+    console.log(tokenParam);
+    console.log(planIdParam);
+
+    if (planIdParam !== "default_order_id") {
+      fetchDataAndBuy();
+    }
+
     const script = document.createElement("script");
     script.src = "https://api.nimbbl.tech/static/assets/js/checkout.js";
     script.async = true;
@@ -121,18 +137,13 @@ const Pay = () => {
     return () => {
       document.body.removeChild(script);
     };
-  }, []);
-
-  useEffect(() => {
-    if (tokenParam !== "default_token" && planIdParam !== "default_order_id") {
-      fetchDataAndBuy();
-    }
-  }, []);
+  };
 
   return (
     <div className="App">
+     
       
-      <header className="App-header">
+     <header className="App-header">
         {/* creating a loading screen */}
         {token === "" ? (
           <div className="loading">
@@ -151,4 +162,4 @@ const Pay = () => {
   );
 };
 
-export default Pay;
+export default UpgradePage;

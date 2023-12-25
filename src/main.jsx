@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Pay from "./pages/Pay";
 import Test from "./pages/Test";
 import App from "./App";
+import UpgradePage from "./pages/UpgradePage";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,12 @@ const router = createBrowserRouter([
     path: "/test",
     element: <App />,
   },
+  {
+    path: "/upgrade/plan",
+    element: <UpgradePage />,
   
+  }
+
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
