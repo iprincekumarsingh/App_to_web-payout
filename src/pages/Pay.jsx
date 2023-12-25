@@ -71,7 +71,7 @@ const Pay = () => {
 
               axios
                 .post(
-                  "https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-payment",
+                  "http://127.0.0.1:4000/api/v1/payment/create-payment",
                   {
                     nimbbl_order_id: response.order_id,
                     nimbbl_transaction_id: response.nimbbl_transaction_id,
@@ -90,11 +90,6 @@ const Pay = () => {
                 )
                 .then((res) => {
                   console.log(res);
-                  if (res.data.status === "success") {
-                    navigate(`/pay/success`);
-                  } else {
-                    alert("Payment failed");
-                  }
                 })
                 .catch((err) => {
                   console.log(err);
@@ -142,14 +137,14 @@ const Pay = () => {
         />
       </Helmet>
       <header className="App-header">
-       {/* creating a loading screen */}
+        {/* creating a loading screen */}
         {token === "" ? (
           <div className="loading">
             <h2>Loading...</h2>
           </div>
         ) : (
           <div className="App-link">
-          {/*loading screen  */}
+            {/*loading screen  */}
             {/*  */}
             <p>loading </p>
             <p>don`t refresh or move back</p>
