@@ -90,6 +90,11 @@ const Pay = () => {
                 )
                 .then((res) => {
                   console.log(res);
+                  if (res.data.status === "success") {
+                    navigate(`/pay/success`);
+                  } else {
+                    alert("Payment failed");
+                  }
                 })
                 .catch((err) => {
                   console.log(err);
