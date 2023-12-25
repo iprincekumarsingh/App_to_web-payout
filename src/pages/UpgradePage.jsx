@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Helmet } from "react-helmet";
 import { useSearchParams, useNavigate } from "react-router-dom";
@@ -12,7 +12,7 @@ const UpgradePage = () => {
   const plan_type = searchParams.get("plan_type") || "one_time";
   const role = searchParams.get("role") || "default_role";
   const isupgrade = searchParams.get("isupgrade") || "false";
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const fetchDataAndBuy = async () => {
     try {
@@ -21,11 +21,6 @@ const UpgradePage = () => {
         planIdParam === "default_order_id" ||
         role === "default_role"
       ) {
-        console.log(tokenParam, planIdParam, role, isupgrade);
-
-        return;
-      }
-      if (tokenParam === null || planIdParam === null) {
         console.log(tokenParam, planIdParam, role, isupgrade);
         return;
       }
@@ -64,6 +59,7 @@ const UpgradePage = () => {
 
         if (orderResponse.data.data.paymentInitiated) {
           // Check if payment has already been initiated
+          setLoading(false);
           return;
         }
 
@@ -120,11 +116,7 @@ const UpgradePage = () => {
     }
   };
 
-  // Use window.onload instead of useEffect
-  window.onload = () => {
-    console.log(tokenParam);
-    console.log(planIdParam);
-
+  useEffect(() => {
     if (planIdParam !== "default_order_id") {
       fetchDataAndBuy();
     }
@@ -137,24 +129,22 @@ const UpgradePage = () => {
     return () => {
       document.body.removeChild(script);
     };
-  };
+  }, [planIdParam]);
 
   return (
     <div className="App">
      
-      
-     <header className="App-header">
+      <header className="App-header">
         {/* creating a loading screen */}
-        {token === "" ? (
+        {loading ? (
           <div className="loading">
             <h2>Loading...</h2>
           </div>
         ) : (
           <div className="App-link">
-            {/*loading screen  */}
-            {/*  */}
-            <p>loading </p>
-            <p>don`t refresh or move back</p>
+            {/* loading screen */}
+            <p>Loading </p>
+            <p>Don't refresh or move back</p>
           </div>
         )}
       </header>
