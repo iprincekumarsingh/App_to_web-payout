@@ -71,7 +71,7 @@ const Pay = () => {
 
               axios
                 .post(
-                  "http://127.0.0.1:4000/api/v1/payment/create-payment",
+                  "https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-payment",
                   {
                     nimbbl_order_id: response.order_id,
                     nimbbl_transaction_id: response.nimbbl_transaction_id,
@@ -95,8 +95,9 @@ const Pay = () => {
                   console.log(err);
                 });
 
-              // Add a parameter to the URL if the payment is successful
-              // navigate(`/pay/success`);
+                // change the url to success page
+              window.location.href = "/pay/success";
+           
             } else if (response.status === "failure") {
               alert("Payment failed");
             }

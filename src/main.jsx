@@ -13,7 +13,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/pay/success",
-    element: <Pay />,
+    element: <h1>Hello</h1>,
   }, {
     path: "/test",
     element: <App />,
