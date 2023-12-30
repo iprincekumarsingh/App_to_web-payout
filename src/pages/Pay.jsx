@@ -95,9 +95,9 @@ const UpgradePage = () => {
         // Function to send order status and create detailed payment
         const sendOrderAndCreatePayment = async (response) => {
           try {
-            // Your logic to update order status
 
-            // Call the createPayment function
+
+            console.log("Developer", response);
             await createPayment(response);
           } catch (error) {
             console.error("Error:", error.message);
@@ -166,52 +166,55 @@ const UpgradePage = () => {
   }, [planIdParam]);
 
   return (
-    <div style={styles.app}>
-      <h1 style={styles.heading}>Dorzet</h1>
-      <header style={styles.header}>
-        {loading ? (
-          // Loading screen
+  <div style={styles.app}>
+    <h1 style={styles.heading}>Dorzet</h1>
+    <header style={styles.header}>
+      {loading ? (
+        // Loading screen
 
-          <div>
-            <p style={styles.loadingText}>Loading...</p>
-            <p style={styles.loadingDescription}>
-              Please wait while we are processing the payment
-            </p>
-          </div>
-        ) : null}
+        <div>
+          <p style={styles.loadingText}>Loading...</p>
+          <p style={styles.loadingDescription}>
+            Please wait while we are processing the payment
+          </p>
+        </div>
+      ) : null}
 
-        {orderStatus === "success" ? (
-          // Success screen
+      {orderStatus === "success" ? (
+        // Success screen
+        <div>
+          <Helmet>
+            <title>Payment Successful</title>
+          </Helmet>
+          <p style={styles.loadingText}>Payment Successful</p>
+          <p style={styles.loadingDescription}>
+            Your payment has been successfully processed
+          </p>
+        </div>
+      ) : (
+        ""
+      )}
+
+      {orderStatus === "failed" ? (
           <div>
-            <Helmet>
-              <title>Payment Successful</title>
-            </Helmet>
-            <p style={styles.loadingText}>Payment Successful</p>
-            <p style={styles.loadingDescription}>
-              Your payment has been successfully processed
-            </p>
-          </div>
-        ) : (
-          <div>
-            <Helmet>
-              <title>Payment Failed</title>
-            </Helmet>
-            <p style={styles.loadingText}>Payment Failed</p>
-            {/*set text to make the payment again */}
-            <p style={styles.loadingDescription}>
-              Your payment has been failed
-            </p>
-            <button
-              onClick={() => {
-                fetchDataAndBuy();
-              }}
-            >
-              Make the payment again by clicking here
-            </button>
-          </div>
-        )}
-      </header>
-    </div>
+          <Helmet>
+            <title>Payment Failed</title>
+          </Helmet>
+          <p style={styles.loadingText}>Payment Failed</p>
+          {/*set text to make the payment again */}
+          <p style={styles.loadingDescription}>
+            Your payment has been failed
+          </p>
+          <button
+            onClick={() => {
+              fetchDataAndBuy();
+            }}
+          >
+            Make the payment again by clicking here
+          </button>
+        </div>) : null}
+    </header>
+  </div>
   );
 };
 

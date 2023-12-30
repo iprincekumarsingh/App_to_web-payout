@@ -190,32 +190,29 @@ const UpgradePage = () => {
             <p style={styles.loadingDescription}>
               Your payment has been successfully processed
             </p>
-
-           
           </div>
-
-
         ) : (
-          <div>
-            <Helmet>
-              <title>Payment Failed</title>
-            </Helmet>
-            <p style={styles.loadingText}>Payment Failed</p>
-              {/*set text to make the payment again */}
-            <p style={styles.loadingDescription}>
-              Your payment has been failed
-            </p>
-            <button onClick={
-              () => {
-
-                fetchDataAndBuy();
-              
-              }
-            }>
-              Make the payment again by clicking here
-            </button>
-          </div>
+         ""
         )}
+
+        {orderStatus === "failed" ? (
+           <div>
+           <Helmet>
+             <title>Payment Failed</title>
+           </Helmet>
+           <p style={styles.loadingText}>Payment Failed</p>
+           {/*set text to make the payment again */}
+           <p style={styles.loadingDescription}>
+             Your payment has been failed
+           </p>
+           <button
+             onClick={() => {
+               fetchDataAndBuy();
+             }}
+           >
+             Make the payment again by clicking here
+           </button>
+         </div>) : null}
       </header>
     </div>
   );
