@@ -17,13 +17,14 @@ const UpgradePage = () => {
 
   const fetchDataAndBuy = async () => {
     
+    // console.log("token",tokenParam);
+    console.log("Developer",tokenParam, planIdParam, plan_type, isupgrade);
     try {
       if (
         tokenParam === "default_token" ||
-        planIdParam === "default_order_id" ||
-        role === "default_role"
+        planIdParam === "default_order_id" 
+       
       ) {
-        console.log(tokenParam, planIdParam, role, isupgrade);
         return;
       }
 
@@ -58,7 +59,7 @@ const UpgradePage = () => {
           }
         );
 
-        console.log(orderResponse.data.data);
+        // console.log(orderResponse.data.data);
 
         if (orderResponse.data.data.paymentInitiated) {
           // Check if payment has already been initiated
@@ -153,6 +154,7 @@ const UpgradePage = () => {
 
   useEffect(() => {
     if (planIdParam !== "default_order_id") {
+      console.log(planIdParam);
       fetchDataAndBuy();
     }
 
