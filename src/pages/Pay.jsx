@@ -13,9 +13,10 @@ const UpgradePage = () => {
   const plan_type = searchParams.get("plan_type") || "one_time";
   const role = searchParams.get("role") || "default_role";
   const isupgrade = searchParams.get("isupgrade") || "false";
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const fetchDataAndBuy = async () => {
+    
     try {
       if (
         tokenParam === "default_token" ||
@@ -28,7 +29,7 @@ const UpgradePage = () => {
 
       // creating token for
       const response = await axios.post(
-        "https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-token",
+        "https://vast-red-lizard-tux.cyclic.app/api/v1/payment/create-token",
         {
           plan_id: planIdParam,
           plan_type: plan_type,
@@ -45,7 +46,7 @@ const UpgradePage = () => {
 
       if (response.data.data.orderToken !== null) {
         const orderResponse = await axios.post(
-          `https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-order?isupgrade=true&role=${role}`,
+          `https://vast-red-lizard-tux.cyclic.app/api/v1/payment/create-order?isupgrade=true&role=${role}`,
           {
             plan_id: planIdParam,
           },
@@ -126,7 +127,7 @@ const UpgradePage = () => {
 
             // Example API request
             const res = await axios.post(
-              `https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-payment`,
+              `https://vast-red-lizard-tux.cyclic.app/api/v1/payment/create-payment`,
               payload,
               {
                 headers: {
@@ -240,6 +241,7 @@ const styles = {
   loadingText: {
     fontSize: "30px",
     fontWeight: "bold",
+    color:'black'
   },
   loadingDescription: {
     fontSize: "20px",

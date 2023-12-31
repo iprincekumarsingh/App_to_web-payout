@@ -28,7 +28,7 @@ const UpgradePage = () => {
 
       // creating token for
       const response = await axios.post(
-        "https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-token",
+        "https://vast-red-lizard-tux.cyclic.app//api/v1/payment/create-token",
         {
           plan_id: planIdParam,
           plan_type: plan_type,
@@ -45,7 +45,7 @@ const UpgradePage = () => {
 
       if (response.data.data.orderToken !== null) {
         const orderResponse = await axios.post(
-          `https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-order?isupgrade=true&role=${role}`,
+          `https://vast-red-lizard-tux.cyclic.app//api/v1/payment/create-order?isupgrade=true&role=${role}`,
           {
             plan_id: planIdParam,
           },
@@ -126,7 +126,7 @@ const UpgradePage = () => {
 
             // Example API request
             const res = await axios.post(
-              `https://clumsy-puce-abalone.cyclic.app/api/v1/payment/create-payment?role=${role}&isupgrade=true`,
+              `https://vast-red-lizard-tux.cyclic.app/api/v1/payment/create-payment?role=${role}&isupgrade=true`,
               payload,
               {
                 headers: {
