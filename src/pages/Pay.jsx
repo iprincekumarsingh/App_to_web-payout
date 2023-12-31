@@ -46,7 +46,7 @@ const UpgradePage = () => {
 
       if (response.data.data.orderToken !== null) {
         const orderResponse = await axios.post(
-          `https://vast-red-lizard-tux.cyclic.app/api/v1/payment/create-order?isupgrade=true&role=${role}`,
+          `https://vast-red-lizard-tux.cyclic.app/api/v1/payment/create-order?isupgrade=false&role=${role}`,
           {
             plan_id: planIdParam,
           },
