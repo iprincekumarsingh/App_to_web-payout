@@ -126,7 +126,7 @@ const UpgradePage = () => {
 
             // Example API request
             const res = await axios.post(
-              `http://127.0.0.1:4000/api/v1/payment/create-payment?role=${role}&isupgrade=true`,
+              `https://vast-red-lizard-tux.cyclic.app/api/v1/payment/create-payment?role=${role}&isupgrade=true`,
               payload,
               {
                 headers: {
@@ -192,28 +192,27 @@ const UpgradePage = () => {
             </p>
           </div>
         ) : (
-          ""
+         ""
         )}
 
         {orderStatus === "failed" ? (
-          <div>
-            <Helmet>
-              <title>Payment Failed</title>
-            </Helmet>
-            <p style={styles.loadingText}>Payment Failed</p>
-            {/*set text to make the payment again */}
-            <p style={styles.loadingDescription}>
-              Your payment has been failed
-            </p>
-            <button
-              onClick={() => {
-                fetchDataAndBuy();
-              }}
-            >
-              Make the payment again by clicking here
-            </button>
-          </div>
-        ) : null}
+           <div>
+           <Helmet>
+             <title>Payment Failed</title>
+           </Helmet>
+           <p style={styles.loadingText}>Payment Failed</p>
+           {/*set text to make the payment again */}
+           <p style={styles.loadingDescription}>
+             Your payment has been failed
+           </p>
+           <button
+             onClick={() => {
+               fetchDataAndBuy();
+             }}
+           >
+             Make the payment again by clicking here
+           </button>
+         </div>) : null}
       </header>
     </div>
   );
