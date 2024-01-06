@@ -139,6 +139,9 @@ const UpgradePage = () => {
             );
 
             console.log("Developer", res);
+
+                 // change the url to success page
+              window.location.href = "/pay/success";
           } catch (error) {
             console.log("Error generate", error);
           }
