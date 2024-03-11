@@ -28,7 +28,7 @@ const UpgradePage = () => {
 
       // creating token for
       const response = await axios.post(
-        "https://vast-red-lizard-tux.cyclic.app//api/v1/payment/create-token",
+        "https://vast-red-lizard-tux.cyclic.app/api/v1/payment/create-token",
         {
           plan_id: planIdParam,
           plan_type: plan_type,
@@ -42,10 +42,11 @@ const UpgradePage = () => {
       );
 
       setToken(response.data.data.orderToken);
+      console.log(tokenParam);
 
       if (response.data.data.orderToken !== null) {
         const orderResponse = await axios.post(
-          `https://vast-red-lizard-tux.cyclic.app//api/v1/payment/create-order?isupgrade=true&role=${role}`,
+          `https://vast-red-lizard-tux.cyclic.app/api/v1/payment/create-order?isupgrade=true&role=${role}`,
           {
             plan_id: planIdParam,
           },
@@ -138,7 +139,7 @@ const UpgradePage = () => {
 
             console.log("Developer", res);
 
-         window.location.href = "/pay/success";
+            window.location.href = "/pay/success";
           } catch (error) {
             console.log("Error generate", error);
           }
@@ -194,27 +195,28 @@ const UpgradePage = () => {
             </p>
           </div>
         ) : (
-         ""
+          ""
         )}
 
         {orderStatus === "failed" ? (
-           <div>
-           <Helmet>
-             <title>Payment Failed</title>
-           </Helmet>
-           <p style={styles.loadingText}>Payment Failed</p>
-           {/*set text to make the payment again */}
-           <p style={styles.loadingDescription}>
-             Your payment has been failed
-           </p>
-           <button
-             onClick={() => {
-               fetchDataAndBuy();
-             }}
-           >
-             Make the payment again by clicking here
-           </button>
-         </div>) : null}
+          <div>
+            <Helmet>
+              <title>Payment Failed</title>
+            </Helmet>
+            <p style={styles.loadingText}>Payment Failed</p>
+            {/*set text to make the payment again */}
+            <p style={styles.loadingDescription}>
+              Your payment has been failed
+            </p>
+            <button
+              onClick={() => {
+                fetchDataAndBuy();
+              }}
+            >
+              Make the payment again by clicking here
+            </button>
+          </div>
+        ) : null}
       </header>
     </div>
   );
