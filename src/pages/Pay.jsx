@@ -68,7 +68,7 @@ const UpgradePage = () => {
         }
 
         const options = {
-          access_key: "access_key_MwvMYLzPNaQ62vry",
+          access_key: "access_key_81x7BagWlM1Rn05N",
           order_id: orderResponse.data.data.order_id,
           callback_handler: async function (response) {
             // set order status
