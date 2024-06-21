@@ -30,7 +30,7 @@ const UpgradePage = () => {
 
       // creating token for
       const response = await axios.post(
-        "https://vast-red-lizard-tux.cyclic.app/api/v1/payment/create-token",
+        "https://api.dorzet.in/api/v1/payment/create-token",
         {
           plan_id: planIdParam,
           plan_type: plan_type,
@@ -47,7 +47,7 @@ const UpgradePage = () => {
 
       if (response.data.data.orderToken !== null) {
         const orderResponse = await axios.post(
-          `https://vast-red-lizard-tux.cyclic.app/api/v1/payment/create-order?isupgrade=false&role=${role}`,
+          `https://api.dorzet.in/api/v1/payment/create-order?isupgrade=false&role=${role}`,
           {
             plan_id: planIdParam,
           },
@@ -128,7 +128,7 @@ const UpgradePage = () => {
 
             // Example API request
             const res = await axios.post(
-              `https://vast-red-lizard-tux.cyclic.app/api/v1/payment/create-payment`,
+              `https://api.dorzet.in/api/v1/payment/create-payment`,
               payload,
               {
                 headers: {
