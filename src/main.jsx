@@ -14,17 +14,20 @@ const router = createBrowserRouter([
   },
   {
     path: "/pay/success",
-    element: <h1>Hello</h1>,
-  }, {
+    element: (
+      <>
+        <h1>Payment Success</h1>
+      </>
+    ),
+  },
+  {
     path: "/test",
     element: <App />,
   },
   {
     path: "/upgrade/plan",
     element: <UpgradePage />,
-  
-  }
-
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
