@@ -28,7 +28,7 @@ const UpgradePage = () => {
 
       // creating token for
       const response = await axios.post(
-        "http://api.dorzet.in/api/v1/payment/create-token",
+        "https://api.dorzet.in/api/v1/payment/create-token",
         {
           plan_id: planIdParam,
           plan_type: plan_type,
@@ -127,7 +127,7 @@ const UpgradePage = () => {
 
             // Example API request
             const res = await axios.post(
-              `https://api.dorzet.in/api/v1/payment/create-payment?role=${role}&isupgrade=true`,
+              `http://192.168.1.5:4000/api/v1/payment/create-payment?role=${role}&isupgrade=true`,
               payload,
               {
                 headers: {

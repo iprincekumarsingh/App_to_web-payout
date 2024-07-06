@@ -6,11 +6,24 @@ import Pay from "./pages/Pay";
 import Test from "./pages/Test";
 import App from "./App";
 import UpgradePage from "./pages/UpgradePage";
+import OneTimePay from "./pages/OneTimePay";
+import "./index.css"
+import Login from "./Login";
+import DeleteAcccount from "./pages/DeleteAcccount";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path:'/',
+    element:'Something Went Wrong'
+  },
+  {
+    path: "/pay",
     element: <Pay />,
+  },
+  {
+    path: '/oneTimePayment',
+    element: <OneTimePay />
+
   },
   {
     path: "/pay/success",
@@ -25,9 +38,16 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
+    path: '/login',
+    element: <Login />
+  },
+  {
     path: "/upgrade/plan",
     element: <UpgradePage />,
-  },
+  }, {
+    path: 'delete/account',
+    element: <DeleteAcccount />
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

@@ -16,14 +16,14 @@ const UpgradePage = () => {
   const [loading, setLoading] = useState(true);
 
   const fetchDataAndBuy = async () => {
-    
+
     // console.log("token",tokenParam);
-    console.log("Developer",tokenParam, planIdParam, plan_type, isupgrade);
+    console.log("Developer", tokenParam, planIdParam, plan_type, isupgrade);
     try {
       if (
         tokenParam === "default_token" ||
-        planIdParam === "default_order_id" 
-       
+        planIdParam === "default_order_id"
+
       ) {
         return;
       }
@@ -128,7 +128,7 @@ const UpgradePage = () => {
 
             // Example API request
             const res = await axios.post(
-              `https://api.dorzet.in/api/v1/payment/create-payment`,
+              `https://api.dorzet.in/api/v1/payment/2/create-payment`,
               payload,
               {
                 headers: {
@@ -140,8 +140,8 @@ const UpgradePage = () => {
 
             console.log("Developer", res);
 
-                 // change the url to success page
-              window.location.href = "/pay/success";
+            // change the url to success page
+            window.location.href = "/pay/success";
           } catch (error) {
             console.log("Error generate", error);
           }
@@ -172,55 +172,55 @@ const UpgradePage = () => {
   }, [planIdParam]);
 
   return (
-  <div style={styles.app}>
-    <h1 style={styles.heading}>Dorzet</h1>
-    <header style={styles.header}>
-      {loading ? (
-        // Loading screen
+    <div style={styles.app}>
+      <h1 style={styles.heading}>Dorzet</h1>
+      <header style={styles.header}>
+        {loading ? (
+          // Loading screen
 
-        <div>
-          <p style={styles.loadingText}>Loading...</p>
-          <p style={styles.loadingDescription}>
-            Please wait while we are processing the payment
-          </p>
-        </div>
-      ) : null}
-
-      {orderStatus === "success" ? (
-        // Success screen
-        <div>
-          <Helmet>
-            <title>Payment Successful</title>
-          </Helmet>
-          <p style={styles.loadingText}>Payment Successful</p>
-          <p style={styles.loadingDescription}>
-            Your payment has been successfully processed
-          </p>
-        </div>
-      ) : (
-        ""
-      )}
-
-      {orderStatus === "failed" ? (
           <div>
-          <Helmet>
-            <title>Payment Failed</title>
-          </Helmet>
-          <p style={styles.loadingText}>Payment Failed</p>
-          {/*set text to make the payment again */}
-          <p style={styles.loadingDescription}>
-            Your payment has been failed
-          </p>
-          <button
-            onClick={() => {
-              fetchDataAndBuy();
-            }}
-          >
-            Make the payment again by clicking here
-          </button>
-        </div>) : null}
-    </header>
-  </div>
+            <p style={styles.loadingText}>Loading...</p>
+            <p style={styles.loadingDescription}>
+              Please wait while we are processing the payment
+            </p>
+          </div>
+        ) : null}
+
+        {orderStatus === "success" ? (
+          // Success screen
+          <div>
+            <Helmet>
+              <title>Payment Successful</title>
+            </Helmet>
+            <p style={styles.loadingText}>Payment Successful</p>
+            <p style={styles.loadingDescription}>
+              Your payment has been successfully processed
+            </p>
+          </div>
+        ) : (
+          ""
+        )}
+
+        {orderStatus === "failed" ? (
+          <div>
+            <Helmet>
+              <title>Payment Failed</title>
+            </Helmet>
+            <p style={styles.loadingText}>Payment Failed</p>
+            {/*set text to make the payment again */}
+            <p style={styles.loadingDescription}>
+              Your payment has been failed
+            </p>
+            <button
+              onClick={() => {
+                fetchDataAndBuy();
+              }}
+            >
+              Make the payment again by clicking here
+            </button>
+          </div>) : null}
+      </header>
+    </div>
   );
 };
 
@@ -246,7 +246,7 @@ const styles = {
   loadingText: {
     fontSize: "30px",
     fontWeight: "bold",
-    color:'black'
+    color: 'black'
   },
   loadingDescription: {
     fontSize: "20px",
