@@ -8,7 +8,7 @@ const Login = () => {
     const [errorMsg, setErrorMsg] = useState('');
     const [loading, setLoading] = useState(false);
     const [tokenExists, setTokenExists] = useState(false);
-    const getBaseURL = () => 'http://localhost:4000/api/v1'; // Replace with your actual base URL
+    const getBaseURL = () => 'https://api.dorzet.in/api/v1'; // Replace with your actual base URL
     React.useEffect(() => {
         // Check if token exists in localStorage when component mounts
         const token = localStorage.getItem('token');

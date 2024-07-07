@@ -13,8 +13,8 @@ import DeleteAcccount from "./pages/DeleteAcccount";
 
 const router = createBrowserRouter([
   {
-    path:'/',
-    element:'Something Went Wrong'
+    path: '/',
+    element: 'Something Went Wrong'
   },
   {
     path: "/pay",
@@ -45,7 +45,7 @@ const router = createBrowserRouter([
     path: "/upgrade/plan",
     element: <UpgradePage />,
   }, {
-    path: 'delete/account',
+    path: '/delete/account',
     element: <DeleteAcccount />
   }
 ]);
