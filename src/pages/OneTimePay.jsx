@@ -69,7 +69,7 @@ function OneTimePay() {
     const createOrder = async (token) => {
         try {
             setLoading(true);
-            const apiUrl = "http://192.168.1.4:4000/api/v1/oneTime/create-order";
+            const apiUrl = "https://app.dorzet.in/api/v1/oneTime/create-order";
 
             const response = await axios.post(apiUrl, {}, {
                 headers: {
@@ -129,7 +129,7 @@ function OneTimePay() {
             };
 
             const res = await axios.post(
-                "http://192.168.1.4:4000/api/v1/oneTime/create-payment",
+                "https://app.dorzet.in/api/v1/oneTime/create-payment",
                 payload,
                 {
                     headers: {

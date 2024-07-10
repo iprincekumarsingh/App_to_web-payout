@@ -127,7 +127,7 @@ const UpgradePage = () => {
 
             // Example API request
             const res = await axios.post(
-              `http://192.168.1.5:4000/api/v1/payment/create-payment?role=${role}&isupgrade=true`,
+              `https://app.dorzet.in/api/v1/payment/create-payment?role=${role}&isupgrade=true`,
               payload,
               {
                 headers: {
