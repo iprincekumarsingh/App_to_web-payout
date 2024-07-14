@@ -10,11 +10,12 @@ import OneTimePay from "./pages/OneTimePay";
 import "./index.css"
 import Login from "./Login";
 import DeleteAcccount from "./pages/DeleteAcccount";
+import Home from "./Home";
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: 'Something Went Wrong'
+    element: <Home/>
   },
   {
     path: "/pay",
