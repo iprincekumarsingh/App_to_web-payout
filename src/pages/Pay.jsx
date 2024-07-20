@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Helmet } from "react-helmet";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import logo from '../assets/logo.png';
 
 const UpgradePage = () => {
   const [token, setToken] = useState("");
@@ -14,6 +15,17 @@ const UpgradePage = () => {
   const role = searchParams.get("role") || "default_role";
   const isupgrade = searchParams.get("isupgrade") || "false";
   const [loading, setLoading] = useState(true);
+
+  const [error, setIsError] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+  useEffect(() => {
+    if (tokenParam === "default_token" || planIdParam === "default_order_id") {
+      setIsError(true);
+      setErrorMessage(
+        'Error 501 :Something went wrong. Please try again or contact support'
+      );
+    }
+  }, []);
 
   const fetchDataAndBuy = async () => {
 
@@ -172,17 +184,29 @@ const UpgradePage = () => {
   }, [planIdParam]);
 
   return (
-    <div style={styles.app}>
-      <h1 style={styles.heading}>Dorzet</h1>
-      <header style={styles.header}>
+    <div className="flex flex-col items-center justify-center min-h-screen ">
+    <h1 className="mt-10">
+      <img src={logo} alt="Logo" className="w-48 md:w-64" />
+      
+    </h1>
+    <span>{
+        errorMessage
+        }</span>
+
+    {!error && (
+      <header className="mt-10 px-4 md:px-0 w-full max-w-md text-center">
         {loading ? (
           // Loading screen
-
           <div>
-            <p style={styles.loadingText}>Loading...</p>
-            <p style={styles.loadingDescription}>
+            <p className="text-lg font-semibold">Loading...</p>
+            <p className="text-sm mt-2">
               Please wait while we are processing the payment
             </p>
+            <span className=" 
+            text-xs mt-2 text-red-500
+            ">
+              don`t refresh the page or go back
+            </span>
           </div>
         ) : null}
 
@@ -192,35 +216,36 @@ const UpgradePage = () => {
             <Helmet>
               <title>Payment Successful</title>
             </Helmet>
-            <p style={styles.loadingText}>Payment Successful</p>
-            <p style={styles.loadingDescription}>
+            <p className="text-lg font-semibold">Payment Successful</p>
+            <p className="text-sm mt-2">
               Your payment has been successfully processed
             </p>
           </div>
-        ) : (
-          ""
-        )}
+        ) : null}
 
         {orderStatus === "failed" ? (
+          // Failed screen
           <div>
             <Helmet>
               <title>Payment Failed</title>
             </Helmet>
-            <p style={styles.loadingText}>Payment Failed</p>
-            {/*set text to make the payment again */}
-            <p style={styles.loadingDescription}>
-              Your payment has been failed
+            <p className="text-lg font-semibold">Payment Failed</p>
+            <p className="text-sm mt-2">
+              Your payment has failed
             </p>
             <button
+              className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"
               onClick={() => {
                 fetchDataAndBuy();
               }}
             >
-              Make the payment again by clicking here
+              Make the payment again
             </button>
-          </div>) : null}
+          </div>
+        ) : null}
       </header>
-    </div>
+    )}
+  </div>
   );
 };
 
