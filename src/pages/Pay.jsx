@@ -185,67 +185,73 @@ const UpgradePage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen ">
-    <h1 className="mt-10">
-      <img src={logo} alt="Logo" className="w-48 md:w-64" />
-      
-    </h1>
-    <span>{
-        errorMessage
-        }</span>
+      <h1 className="mt-10">
+        <img src={logo} alt="Logo" className="w-48 md:w-64" />
 
-    {!error && (
-      <header className="mt-10 px-4 md:px-0 w-full max-w-md text-center">
-        {loading ? (
-          // Loading screen
-          <div>
-            <p className="text-lg font-semibold">Loading...</p>
-            <p className="text-sm mt-2">
-              Please wait while we are processing the payment
-            </p>
-            <span className=" 
+      </h1>
+      <p className="text-sm mt-2">
+        Please wait while we are processing the payment
+      </p>
+      <span className="text-xs mt-2 text-red-500">
+        don`t refresh the page or go back
+      </span>
+      <span>{
+        errorMessage
+      }</span>
+
+      {!error && (
+        <header className="mt-10 px-4 md:px-0 w-full max-w-md text-center">
+          {loading ? (
+            // Loading screen
+            <div>
+              <p className="text-lg font-semibold">Loading...</p>
+              <p className="text-sm mt-2">
+                Please wait while we are processing the payment
+              </p>
+              <span className=" 
             text-xs mt-2 text-red-500
             ">
-              don`t refresh the page or go back
-            </span>
-          </div>
-        ) : null}
+                don`t refresh the page or go back
+              </span>
+            </div>
+          ) : null}
 
-        {orderStatus === "success" ? (
-          // Success screen
-          <div>
-            <Helmet>
-              <title>Payment Successful</title>
-            </Helmet>
-            <p className="text-lg font-semibold">Payment Successful</p>
-            <p className="text-sm mt-2">
-              Your payment has been successfully processed
-            </p>
-          </div>
-        ) : null}
+          {orderStatus === "success" ? (
+            // Success screen
+            <div>
+              <Helmet>
+                <title>Payment Successful</title>
+              </Helmet>
+              <p className="text-lg font-semibold">Payment Successful</p>
+              <p className="text-sm mt-2">
+                Your payment has been successfully processed
+              </p>
+            </div>
+          ) : null}
 
-        {orderStatus === "failed" ? (
-          // Failed screen
-          <div>
-            <Helmet>
-              <title>Payment Failed</title>
-            </Helmet>
-            <p className="text-lg font-semibold">Payment Failed</p>
-            <p className="text-sm mt-2">
-              Your payment has failed
-            </p>
-            <button
-              className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"
-              onClick={() => {
-                fetchDataAndBuy();
-              }}
-            >
-              Make the payment again
-            </button>
-          </div>
-        ) : null}
-      </header>
-    )}
-  </div>
+          {orderStatus === "failed" ? (
+            // Failed screen
+            <div>
+              <Helmet>
+                <title>Payment Failed</title>
+              </Helmet>
+              <p className="text-lg font-semibold">Payment Failed</p>
+              <p className="text-sm mt-2">
+                Your payment has failed
+              </p>
+              <button
+                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"
+                onClick={() => {
+                  fetchDataAndBuy();
+                }}
+              >
+                Make the payment again
+              </button>
+            </div>
+          ) : null}
+        </header>
+      )}
+    </div>
   );
 };
 

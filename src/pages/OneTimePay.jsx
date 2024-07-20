@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { Helmet } from "react-helmet";
-
+import logo from '../assets/logo.png';
 function OneTimePay() {
     const [token, setToken] = useState('');
     const [coupon, setCoupon] = useState('');
@@ -10,6 +10,7 @@ function OneTimePay() {
     const [plan_type, setPlanType] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [isError, setIsError] = useState(true);
 
     // Fetch initial data from URL params
     useEffect(() => {
@@ -170,7 +171,18 @@ function OneTimePay() {
     }, []);
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+        <div className="min-h-screen flex flex-col items-center justify-center bg-white">
+            <h1 className="mt-10">
+                <img src={logo} alt="Logo" className="w-48 md:w-64" />
+
+
+            </h1>
+            <p className="text-sm mt-2">
+                Please wait while we are processing the payment
+            </p>
+            <span className="text-xs mt-2 text-red-500">
+                don`t refresh the page or go back
+            </span>
             <Helmet>
                 <title>One Time Pay</title>
             </Helmet>
@@ -179,16 +191,25 @@ function OneTimePay() {
                     <div className="spinner"></div>
                 </div>
             )}
-            {!loading && (
-                <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    <h1 className="text-2xl font-bold mb-4">One Time Pay</h1>
-                    {error && (
-                        <div className="mb-4">
-                            <p className="text-red-500 text-xs italic">{error}</p>
+            {!isError && (
+                <header className="mt-10 px-4 md:px-0 w-full max-w-md text-center">
+                    {loading ? (
+                        // Loading screen
+                        <div>
+                            <p className="text-lg font-semibold text-black">Loading...</p>
+                            <p className="text-sm mt-2">
+                                Please wait while we are processing the payment
+                            </p>
+                            <span className="text-xs mt-2 text-red-500">
+                                don`t refresh the page or go back
+                            </span>
                         </div>
-                    )}
-                    <p className="mb-4">Order Amount: {order_amount}</p>
-                </div>
+                    ) : null}
+
+
+
+
+                </header>
             )}
         </div>
     );
