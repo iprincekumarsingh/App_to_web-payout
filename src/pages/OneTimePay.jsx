@@ -84,7 +84,7 @@ function OneTimePay() {
             setPlanType(response.data?.data?.plan_type);
 
             const options = {
-                access_key: "access_key_81x7BagWlM1Rn05N", // Replace with your actual access key
+                access_key: "access_key_MwvMYLzPNaQ62vry", // Replace with your actual access key
                 order_id: response.data.data.order_id,
                 callback_handler: async function (response) {
                     console.log('Nimbbl Checkout Response:', response);

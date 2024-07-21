@@ -80,7 +80,7 @@ const UpgradePage = () => {
         }
 
         const options = {
-          access_key: "access_key_81x7BagWlM1Rn05N",
+          access_key: "access_key_MwvMYLzPNaQ62vry",
           order_id: orderResponse.data.data.order_id,
           callback_handler: async function (response) {
             // set order status
@@ -152,8 +152,15 @@ const UpgradePage = () => {
 
             console.log("Developer", res);
 
+
             // change the url to success page
-            window.location.href = "/pay/success";
+            // window.location.href = "/pay/success";
+            if (res.data.data.order_status !== 'success') {
+              window.location.href = "/pay/failed"
+            }
+            else {
+              window.location.href = "/pay/success";
+            }
           } catch (error) {
             console.log("Error generate", error);
           }
