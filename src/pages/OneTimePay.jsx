@@ -87,18 +87,17 @@ function OneTimePay() {
                 access_key: "access_key_MwvMYLzPNaQ62vry", // Replace with your actual access key
                 order_id: response.data.data.order_id,
                 callback_handler: async function (response) {
-                    console.log('Nimbbl Checkout Response:', response);
+                    console.log('Nimbbl Checkout Response:', response.status);
 
-                    if (response.status === "failed") {
-                        console.log('Payment failed');
-                        setError('Payment failed');
-                        // Optionally retry payment or handle accordingly
+                  
+                    if(response.status==='failed' || response.status==='pending'){
+                             window.location.href = "/pay/failed"
+
                     }
-
                     if (response.status === "success") {
-                        console.log('Payment successful');
                         await sendOrderAndCreatePayment(response, token);
                     }
+                   
                 },
             };
 
@@ -140,7 +139,7 @@ function OneTimePay() {
                 }
             );
 
-            console.log("Payment details saved:", res.data);
+            console.log("Payment details saved:", res);
             // Redirect to success page
             if (res.data.data.order_status !== 'success') {
                 window.location.href = "/pay/failed"
