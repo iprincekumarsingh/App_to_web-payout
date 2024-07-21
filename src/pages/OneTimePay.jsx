@@ -142,7 +142,12 @@ function OneTimePay() {
 
             console.log("Payment details saved:", res.data);
             // Redirect to success page
-            window.location.href = "/pay/success";
+            if (res.data.data.order_status !== 'success') {
+                window.location.href = "/pay/failed"
+            }
+            else {
+                window.location.href = "/pay/success";
+            }
         } catch (error) {
             setError('Error sending order and creating payment: ' + error.message);
         } finally {
